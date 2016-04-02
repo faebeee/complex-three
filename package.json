@@ -1,0 +1,27 @@
+{
+  "name": "complex-threejs",
+  "version": "1.0.0",
+  "description": "Threejs implementation for complexjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faebeee/complex-three.git"
+  },
+  "keywords": [
+    "ThreeJS",
+    "WebGL",
+    "html5",
+    "Canvas",
+    "3d",
+    "Complex",
+    "ComplexJS"
+  ],
+  "author": "Faebeee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faebeee/complex-three/issues"
+  },
+  "homepage": "https://github.com/faebeee/complex-three#readme"
+}
