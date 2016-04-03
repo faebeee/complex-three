@@ -18,14 +18,8 @@ class THREESystem extends cxVoidSystem
         document.body.appendChild( this.renderer.domElement );
     }
 
-    setActiveCamera( cxEntity ){
-        if(cxEntity.hasComponent('three.component.cmaera')){
-            let comp = cxEntity.getComponent('three.component.camera');
-
-            if(comp.active === true){
-                this.camera = comp.camera;
-            }
-        }
+    setActiveCamera( camera ){
+        this.camera = camera;
     }
 
     added ( cxEntity ){
@@ -35,7 +29,8 @@ class THREESystem extends cxVoidSystem
         }
 
         if(cxEntity.hasComponent('three.component.camera')){
-            this.setActiveCamera(cxEntity);
+            let comp = cxEntity.getComponent('three.component.camera');
+            this.setActiveCamera(comp.camera);
         }
     }
 
