@@ -1,13 +1,46 @@
+'use strict';
+
+/**
+ *
+ */
+class THREECameraComponent extends cxComponent
+{
+    constructor( camera )
+    {
+        super();
+        this.tag = 'three.component';
+
+        this.active = true;
+        this.camera = camera;
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
 class THREEComponent extends cxComponent
 {
+    /**
+     * @param  {THREE.Mesh} body Three mash object
+     */
     constructor( body )
     {
         super();
         this.tag = 'three.component';
+
+        /**
+         * [body description]
+         * @type {THREE.Mesh}
+         */
         this.body = body;
     }
 }
 
+/**
+ *
+ */
 class THREESystem extends cxVoidSystem
 {
     constructor()
@@ -16,13 +49,23 @@ class THREESystem extends cxVoidSystem
         this.tag = 'three.system';
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        this.camera = null;
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( this.renderer.domElement );
-        this.camera.position.z = 10;
 
+        document.body.appendChild( this.renderer.domElement );
+    }
+
+    setActiveCamera( cxEntity ){
+        if(cxEntity.hasComponent('three.component.cmaera')){
+            let comp = cxEntity.getComponent('three.component.camera');
+
+            if(comp.active === true){
+                this.camera = comp.camera;
+            }
+        }
     }
 
     added ( cxEntity ){
@@ -30,13 +73,16 @@ class THREESystem extends cxVoidSystem
             let comp = cxEntity.getComponent('three.component');
             this.scene.add(comp.body);
         }
+
+        if(cxEntity.hasComponent('three.component.camera')){
+            this.setActiveCamera(cxEntity);
+        }
     }
 
     update ()
     {
-        this.renderer.render( this.scene, this.camera );
+        if(this.camera){
+            this.renderer.render( this.scene, this.camera );
+        }
     }
-
-
-
 }
