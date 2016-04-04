@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  *
  */
@@ -18,14 +20,27 @@ class THREESystem extends cxVoidSystem
         document.body.appendChild( this.renderer.domElement );
     }
 
+    /**
+     * [setActiveCamera description]
+     * @param {[type]} camera [description]
+     */
     setActiveCamera( camera ){
         this.camera = camera;
     }
 
+    /**
+     * [added description]
+     * @param  {cxEntity} cxEntity [description]
+     */
     added ( cxEntity ){
         if(cxEntity.hasComponent('three.component')){
             let comp = cxEntity.getComponent('three.component');
             this.scene.add(comp.body);
+        }
+
+        if(cxEntity.hasComponent('three.component.light')){
+            let comp = cxEntity.getComponent('three.component.light');
+            this.scene.add(comp.light);
         }
 
         if(cxEntity.hasComponent('three.component.camera')){
@@ -34,6 +49,9 @@ class THREESystem extends cxVoidSystem
         }
     }
 
+    /**
+     * [update description]
+     */
     update ()
     {
         if(this.camera){
