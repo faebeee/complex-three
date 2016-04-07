@@ -43,6 +43,14 @@ class THREESystem extends cxVoidSystem
             this.scene.add(comp.light);
         }
 
+        if(cxEntity.hasComponent('three.component.sprite')){
+            let comp = cxEntity.getComponent('three.component.sprite');
+            if(comp.spriteLoaded){
+                this.scene.add(comp.sprite);
+            }
+        }
+
+
         if(cxEntity.hasComponent('three.component.camera')){
             let comp = cxEntity.getComponent('three.component.camera');
             this.setActiveCamera(comp.camera);

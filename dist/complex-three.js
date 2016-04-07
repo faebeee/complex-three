@@ -970,6 +970,101 @@ THREE.MorphBlendMesh.prototype.update=function(a){for(var b=0,c=this.animationsL
 /**
  *
  */
+class THREESystem extends cxVoidSystem
+{
+    constructor()
+    {
+        super();
+        this.tag = 'three.system';
+
+        this.scene = new THREE.Scene();
+
+        this.camera = null;
+
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+        document.body.appendChild( this.renderer.domElement );
+    }
+
+    /**
+     * [setActiveCamera description]
+     * @param {[type]} camera [description]
+     */
+    setActiveCamera( camera ){
+        this.camera = camera;
+    }
+
+    /**
+     * [added description]
+     * @param  {cxEntity} cxEntity [description]
+     */
+    added ( cxEntity ){
+        if(cxEntity.hasComponent('three.component')){
+            let comp = cxEntity.getComponent('three.component');
+            this.scene.add(comp.body);
+        }
+
+        if(cxEntity.hasComponent('three.component.light')){
+            let comp = cxEntity.getComponent('three.component.light');
+            this.scene.add(comp.light);
+        }
+
+        if(cxEntity.hasComponent('three.component.sprite')){
+            let comp = cxEntity.getComponent('three.component.sprite');
+            if(comp.spriteLoaded){
+                this.scene.add(comp.sprite);
+            }
+        }
+
+
+        if(cxEntity.hasComponent('three.component.camera')){
+            let comp = cxEntity.getComponent('three.component.camera');
+            this.setActiveCamera(comp.camera);
+        }
+    }
+
+    /**
+     * [update description]
+     */
+    update ()
+    {
+        if(this.camera){
+            this.renderer.render( this.scene, this.camera );
+        }
+    }
+}
+
+'use strict';
+
+
+class THREETextureLoaderSystem extends cxVoidSystem
+{
+    constructor()
+    {
+        super();
+        this.tag = 'three.system.textureloader';
+
+    }
+
+    added(cxEntity){
+        if(cxEntity.hasComponent('three.component.sprite')){
+            let comp = cxEntity.getComponent('three.component.sprite');
+            if(comp.spriteLoaded){
+                return;
+            }
+            let map = new THREE.TextureLoader().load(comp.spriteURL);
+            comp.spriteLoad(map);
+            this.world.getSystem('three.system').scene.add(comp.sprite);
+        }
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
 class THREECameraComponent extends cxComponent
 {
     constructor( camera )
@@ -1023,63 +1118,52 @@ class THREELightComponent extends cxComponent
 }
 
 'use strict';
+/**
+ *
+ */
+class THREESpriteComponent extends cxComponent{
+    constructor( material, spriteURL ){
+        super();
+        this.tag = "three.component.sprite";
+        this.material = material;
+        this.sprite = null;
+        this.spriteURL = spriteURL;
+        this.spriteLoaded = false;
+    }
+
+    /**
+     * [spriteLoaded description]
+     * @param  {THREE.Texture} map [description]
+     * @return {[type]}     [description]
+     */
+    spriteLoad( map ){
+        this.material.map = map;
+        this.sprite = new THREE.Sprite(this.material);
+        this.sprite.scale.x = 0.5;
+        this.spriteLoaded = true;
+    }
+}
+
+'use strict';
 
 /**
  *
  */
-class THREESystem extends cxVoidSystem
+class THREETextureComponent extends cxComponent
 {
-    constructor()
+    /**
+     * @param  {THREE.Mesh} body Three mash object
+     */
+    constructor( url )
     {
         super();
-        this.tag = 'three.system';
+        this.tag = 'three.component.texture';
 
-        this.scene = new THREE.Scene();
-
-        this.camera = null;
-
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
-
-        document.body.appendChild( this.renderer.domElement );
-    }
-
-    /**
-     * [setActiveCamera description]
-     * @param {[type]} camera [description]
-     */
-    setActiveCamera( camera ){
-        this.camera = camera;
-    }
-
-    /**
-     * [added description]
-     * @param  {cxEntity} cxEntity [description]
-     */
-    added ( cxEntity ){
-        if(cxEntity.hasComponent('three.component')){
-            let comp = cxEntity.getComponent('three.component');
-            this.scene.add(comp.body);
-        }
-
-        if(cxEntity.hasComponent('three.component.light')){
-            let comp = cxEntity.getComponent('three.component.light');
-            this.scene.add(comp.light);
-        }
-
-        if(cxEntity.hasComponent('three.component.camera')){
-            let comp = cxEntity.getComponent('three.component.camera');
-            this.setActiveCamera(comp.camera);
-        }
-    }
-
-    /**
-     * [update description]
-     */
-    update ()
-    {
-        if(this.camera){
-            this.renderer.render( this.scene, this.camera );
-        }
+        /**
+         * [body description]
+         * @type {THREE.Mesh}
+         */
+        this.texture = null;
+        this.textureURL = url;
     }
 }
