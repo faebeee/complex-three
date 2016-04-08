@@ -970,6 +970,115 @@ THREE.MorphBlendMesh.prototype.update=function(a){for(var b=0,c=this.animationsL
 /**
  *
  */
+class THREECameraComponent extends cxComponent
+{
+    constructor( camera )
+    {
+        super();
+        this.tag = 'three.component.camera';
+
+        this.active = true;
+        this.camera = camera;
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
+class THREEComponent extends cxComponent
+{
+    /**
+     * @param  {THREE.Mesh} body Three mash object
+     */
+    constructor( body )
+    {
+        super();
+        this.tag = 'three.component';
+
+        /**
+         * [body description]
+         * @type {THREE.Mesh}
+         */
+        this.body = body;
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
+class THREELightComponent extends cxComponent
+{
+    constructor( light )
+    {
+        super();
+        this.tag = 'three.component.light';
+
+        this.active = true;
+        this.light = light;
+    }
+}
+
+'use strict';
+/**
+ *
+ */
+class THREESpriteComponent extends cxComponent{
+    constructor( material, spriteURL, loadedCB ){
+        super();
+        this.tag = "three.component.sprite";
+        this.material = material;
+        this.sprite = null;
+        this.spriteURL = spriteURL;
+        this.spriteLoaded = false;
+        this.loadedCB = loadedCB;
+    }
+
+    /**
+     * [spriteLoaded description]
+     * @param  {THREE.Texture} map [description]
+     * @return {[type]}     [description]
+     */
+    spriteLoad( map ){
+        this.material.map = map;
+        this.sprite = new THREE.Sprite(this.material);
+        this.spriteLoaded = true;
+        this.loadedCB(this);
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
+class THREETextureComponent extends cxComponent
+{
+    /**
+     * @param  {THREE.Mesh} body Three mash object
+     */
+    constructor( url )
+    {
+        super();
+        this.tag = 'three.component.texture';
+
+        /**
+         * [body description]
+         * @type {THREE.Mesh}
+         */
+        this.texture = null;
+        this.textureURL = url;
+    }
+}
+
+'use strict';
+
+/**
+ *
+ */
 class THREESystem extends cxVoidSystem
 {
     constructor()
@@ -1057,113 +1166,5 @@ class THREETextureLoaderSystem extends cxVoidSystem
             comp.spriteLoad(map);
             this.world.getSystem('three.system').scene.add(comp.sprite);
         }
-    }
-}
-
-'use strict';
-
-/**
- *
- */
-class THREECameraComponent extends cxComponent
-{
-    constructor( camera )
-    {
-        super();
-        this.tag = 'three.component.camera';
-
-        this.active = true;
-        this.camera = camera;
-    }
-}
-
-'use strict';
-
-/**
- *
- */
-class THREEComponent extends cxComponent
-{
-    /**
-     * @param  {THREE.Mesh} body Three mash object
-     */
-    constructor( body )
-    {
-        super();
-        this.tag = 'three.component';
-
-        /**
-         * [body description]
-         * @type {THREE.Mesh}
-         */
-        this.body = body;
-    }
-}
-
-'use strict';
-
-/**
- *
- */
-class THREELightComponent extends cxComponent
-{
-    constructor( light )
-    {
-        super();
-        this.tag = 'three.component.light';
-
-        this.active = true;
-        this.light = light;
-    }
-}
-
-'use strict';
-/**
- *
- */
-class THREESpriteComponent extends cxComponent{
-    constructor( material, spriteURL ){
-        super();
-        this.tag = "three.component.sprite";
-        this.material = material;
-        this.sprite = null;
-        this.spriteURL = spriteURL;
-        this.spriteLoaded = false;
-    }
-
-    /**
-     * [spriteLoaded description]
-     * @param  {THREE.Texture} map [description]
-     * @return {[type]}     [description]
-     */
-    spriteLoad( map ){
-        this.material.map = map;
-        this.sprite = new THREE.Sprite(this.material);
-        this.sprite.scale.x = 0.5;
-        this.spriteLoaded = true;
-    }
-}
-
-'use strict';
-
-/**
- *
- */
-class THREETextureComponent extends cxComponent
-{
-    /**
-     * @param  {THREE.Mesh} body Three mash object
-     */
-    constructor( url )
-    {
-        super();
-        this.tag = 'three.component.texture';
-
-        /**
-         * [body description]
-         * @type {THREE.Mesh}
-         */
-        this.texture = null;
-        this.textureURL = url;
     }
 }
