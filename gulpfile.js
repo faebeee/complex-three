@@ -3,17 +3,12 @@ var concat = require('gulp-concat');
 
 
 gulp.task('default', function() {
-    var watcher = gulp.watch('src/**/*.js');
-    watcher.on('change', function(event){
-        gulp.start('build');
-    });
-
-    gulp.start('build');
+    gulp.start('complex');
 });
 
-gulp.task('build', function() {
+gulp.task('complex', function() {
   return gulp.src([
-    './lib/**/*.js',
+     './lib/**/*.js',
     './src/**/*.js',
     ])
     .pipe(concat('complex-three.js'))
