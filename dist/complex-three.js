@@ -972,10 +972,11 @@ THREE.MorphBlendMesh.prototype.update=function(a){for(var b=0,c=this.animationsL
  */
 class THREESystem extends cxVoidSystem
 {
-    constructor()
+    constructor( container )
     {
         super();
         this.tag = 'three.system';
+        container = container || null;
 
         this.scene = new THREE.Scene();
 
@@ -984,7 +985,11 @@ class THREESystem extends cxVoidSystem
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( window.innerWidth, window.innerHeight );
 
-        document.body.appendChild( this.renderer.domElement );
+        if(container){
+            container.appendChild( this.renderer.domElement );
+        }else{
+            document.body.appendChild( this.renderer.domElement );
+        }
     }
 
     /**
