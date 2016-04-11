@@ -62,6 +62,27 @@ class THREESystem extends cxVoidSystem
         }
     }
 
+
+    removed(cxEntity){
+
+        if(cxEntity.hasComponent('three.component')){
+            let comp = cxEntity.getComponent('three.component');
+            this.scene.remove(comp.body);
+        }
+
+        if(cxEntity.hasComponent('three.component.light')){
+            let comp = cxEntity.getComponent('three.component.light');
+            this.scene.remove(comp.light);
+        }
+        if(cxEntity.hasComponent('three.component.sprite')){
+            let comp = cxEntity.getComponent('three.component.sprite');
+            if(comp.spriteLoaded){
+                this.scene.remove(comp.sprite);
+            }
+        }
+
+    }
+
     /**
      * [update description]
      */

@@ -3,13 +3,14 @@
  *
  */
 class THREESpriteComponent extends cxComponent{
-    constructor( material, spriteURL ){
+    constructor( material, spriteURL, loadedCB ){
         super();
         this.tag = "three.component.sprite";
         this.material = material;
         this.sprite = null;
         this.spriteURL = spriteURL;
         this.spriteLoaded = false;
+        this.loadedCB = loadedCB;
     }
 
     /**
@@ -20,7 +21,7 @@ class THREESpriteComponent extends cxComponent{
     spriteLoad( map ){
         this.material.map = map;
         this.sprite = new THREE.Sprite(this.material);
-        this.sprite.scale.x = 0.5;
         this.spriteLoaded = true;
+        this.loadedCB(this);
     }
 }

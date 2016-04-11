@@ -1029,6 +1029,27 @@ class THREESystem extends cxVoidSystem
         }
     }
 
+
+    removed(cxEntity){
+
+        if(cxEntity.hasComponent('three.component')){
+            let comp = cxEntity.getComponent('three.component');
+            this.scene.remove(comp.body);
+        }
+
+        if(cxEntity.hasComponent('three.component.light')){
+            let comp = cxEntity.getComponent('three.component.light');
+            this.scene.remove(comp.light);
+        }
+        if(cxEntity.hasComponent('three.component.sprite')){
+            let comp = cxEntity.getComponent('three.component.sprite');
+            if(comp.spriteLoaded){
+                this.scene.remove(comp.sprite);
+            }
+        }
+
+    }
+
     /**
      * [update description]
      */
@@ -1127,13 +1148,14 @@ class THREELightComponent extends cxComponent
  *
  */
 class THREESpriteComponent extends cxComponent{
-    constructor( material, spriteURL ){
+    constructor( material, spriteURL, loadedCB ){
         super();
         this.tag = "three.component.sprite";
         this.material = material;
         this.sprite = null;
         this.spriteURL = spriteURL;
         this.spriteLoaded = false;
+        this.loadedCB = loadedCB;
     }
 
     /**
@@ -1144,8 +1166,8 @@ class THREESpriteComponent extends cxComponent{
     spriteLoad( map ){
         this.material.map = map;
         this.sprite = new THREE.Sprite(this.material);
-        this.sprite.scale.x = 0.5;
         this.spriteLoaded = true;
+        this.loadedCB(this);
     }
 }
 
