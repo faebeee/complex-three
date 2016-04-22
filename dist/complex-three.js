@@ -992,7 +992,7 @@ class THREEComponent extends cxComponent
     /**
      * @param  {THREE.Mesh} body Three mash object
      */
-    constructor( body )
+    constructor( body, wireframe )
     {
         super();
         this.tag = 'three.component';
@@ -1002,6 +1002,15 @@ class THREEComponent extends cxComponent
          * @type {THREE.Mesh}
          */
         this.body = body;
+
+        /**
+         * [wireframe description]
+         * @type {THREE.WireframeHelper}
+         */
+        this.wireframe = wireframe || null;
+        if(this.body && this.wireframe){
+            this.body.add(this.wireframe);
+        }
     }
 }
 
