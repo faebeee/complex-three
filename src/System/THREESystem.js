@@ -9,6 +9,7 @@ class THREESystem extends cxVoidSystem
     {
         super();
         this.tag = 'three.system';
+        container = container || null;
 
         this.scene = new THREE.Scene();
 
@@ -60,7 +61,6 @@ class THREESystem extends cxVoidSystem
 
 
     removed(cxEntity){
-        console.log('remove sprite', cxEntity);
 
         if(cxEntity.hasComponent('three.component')){
             let comp = cxEntity.getComponent('three.component');
