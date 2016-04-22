@@ -5,7 +5,7 @@
  */
 class THREESystem extends cxVoidSystem
 {
-    constructor()
+    constructor( container )
     {
         super();
         this.tag = 'three.system';
@@ -14,10 +14,11 @@ class THREESystem extends cxVoidSystem
 
         this.camera = null;
 
+        this.container = container || document.body;
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( window.innerWidth, window.innerHeight );
 
-        document.body.appendChild( this.renderer.domElement );
+        this.container.appendChild( this.renderer.domElement );
     }
 
     /**

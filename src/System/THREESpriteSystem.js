@@ -1,7 +1,7 @@
 'use strict';
 
 
-class THREETextureLoaderSystem extends cxVoidSystem
+class THREESpriteSystem extends cxVoidSystem
 {
     constructor()
     {
