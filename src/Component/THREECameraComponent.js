@@ -1,5 +1,6 @@
 'use strict';
 
+var cxComponent = require('complex-engine-component');
 /**
  *
  */
@@ -14,3 +15,4 @@ class THREECameraComponent extends cxComponent
         this.camera = camera;
     }
 }
+module.exports = THREECameraComponent;

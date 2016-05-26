@@ -1,6 +1,11 @@
 'use strict';
 
+var cxVoidSystem = require('complex-engine-system').cxVoidSystem;
+var THREE = require('three');
 
+/**
+ *
+ */
 class THREESpriteSystem extends cxVoidSystem
 {
     constructor()
@@ -22,3 +27,5 @@ class THREESpriteSystem extends cxVoidSystem
         }
     }
 }
+
+module.exports = THREESpriteSystem;

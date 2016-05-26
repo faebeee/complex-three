@@ -1,5 +1,7 @@
 'use strict';
 
+var cxComponent = require('complex-engine-component');
+
 /**
  *
  */
@@ -14,3 +16,4 @@ class THREELightComponent extends cxComponent
         this.light = light;
     }
 }
+module.exports = THREELightComponent;

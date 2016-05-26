@@ -1,4 +1,8 @@
 'use strict';
+
+var cxComponent = require('complex-engine-component');
+var THREE = requore('three');
+
 /**
  *
  */
@@ -25,3 +29,5 @@ class THREESpriteComponent extends cxComponent{
         this.loadedCB(this);
     }
 }
+
+module.exports = THREESpriteComponent;

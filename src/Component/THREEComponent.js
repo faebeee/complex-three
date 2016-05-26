@@ -1,5 +1,7 @@
 'use strict';
 
+var cxComponent = require('complex-engine-component');
+
 /**
  *
  */
@@ -29,3 +31,5 @@ class THREEComponent extends cxComponent
         }
     }
 }
+
+module.exports = THREEComponent;

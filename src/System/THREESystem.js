@@ -1,5 +1,8 @@
 'use strict';
 
+var cxVoidSystem = require('complex-engine-system').cxVoidSystem;
+var THREE = require('three');
+
 /**
  *
  */
@@ -90,3 +93,5 @@ class THREESystem extends cxVoidSystem
         }
     }
 }
+
+module.exports = THREESystem;
