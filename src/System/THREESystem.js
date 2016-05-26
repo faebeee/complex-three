@@ -8,19 +8,21 @@ var THREE = require('three');
  */
 class THREESystem extends cxVoidSystem
 {
-    constructor( container )
+    constructor( container, width, height )
     {
         super();
         this.tag = 'three.system';
+
         container = container || null;
+        width = width || window.innerWidth;
+        height = height ||  window.innerHeight;
+        this.container = container || document.body;
 
         this.scene = new THREE.Scene();
-
         this.camera = null;
-
-        this.container = container || document.body;
         this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+        this.renderer.setSize( width, height );
 
         this.container.appendChild( this.renderer.domElement );
     }
@@ -74,13 +76,13 @@ class THREESystem extends cxVoidSystem
             let comp = cxEntity.getComponent('three.component.light');
             this.scene.remove(comp.light);
         }
+
         if(cxEntity.hasComponent('three.component.sprite')){
             let comp = cxEntity.getComponent('three.component.sprite');
             if(comp.spriteLoaded){
                 this.scene.remove(comp.sprite);
             }
         }
-
     }
 
     /**

@@ -20,7 +20,7 @@
     "ComplexJS"
   ],
   "dependencies": {
-    "three": "^0.77.0",
+    "three": "= 0.77.0",
     "complex-engine-component": "^1.0.0",
     "complex-engine-system": "^1.0.0"
   },
