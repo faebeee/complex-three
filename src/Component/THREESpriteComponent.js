@@ -1,7 +1,7 @@
 'use strict';
 
 var cxComponent = require('complex-engine-component');
-var THREE = requore('three');
+var THREE = require('three');
 
 /**
  *
