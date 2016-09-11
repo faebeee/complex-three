@@ -1,6 +1,6 @@
 'use strict';
 
-var cxVoidSystem = require('complex-engine-system').cxVoidSystem;
+var cxVoidSystem = require('complex-engine').cxVoidSystem;
 var THREE = require('three');
 
 /**
