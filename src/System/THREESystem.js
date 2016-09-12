@@ -8,7 +8,7 @@ var THREE = require('three');
  */
 class THREESystem extends cxVoidSystem
 {
-    constructor( container, width, height )
+    constructor( container, width, height, renderer )
     {
         super();
         this.tag = 'three.system';
@@ -20,12 +20,38 @@ class THREESystem extends cxVoidSystem
 
         this.scene = new THREE.Scene();
         this.camera = null;
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = renderer || new THREE.WebGLRenderer();
+        if(!renderer){
+            this.renderer.physicallyCorrectLights = true;
+			this.renderer.gammaInput = true;
+			this.renderer.gammaOutput = true;
+			this.renderer.shadowMap.enabled = true;
+			this.renderer.toneMapping = THREE.ReinhardToneMapping;
+			this.renderer.setPixelRatio( window.devicePixelRatio );
+			this.renderer.setSize( window.innerWidth, window.innerHeight );
+        }
 
         this.renderer.setSize( width, height );
 
         this.container.appendChild( this.renderer.domElement );
+
+    	window.addEventListener( 'resize', (e) => {
+            this.onWindowResize(e);
+        }, false );
     }
+
+    onWindowResize( event ) {
+			let SCREEN_WIDTH = window.innerWidth;
+			let SCREEN_HEIGHT = window.innerHeight;
+			let aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+			this.renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+
+            if(!this.camera){
+                return;
+            }
+            //this.camera.aspect = 0.5 * aspect;
+			this.camera.updateProjectionMatrix();
+		}
 
     /**
      * [setActiveCamera description]

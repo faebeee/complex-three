@@ -1,6 +1,6 @@
 {
   "name": "complex-threejs",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Threejs implementation for complexjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
