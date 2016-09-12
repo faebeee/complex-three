@@ -90,7 +90,7 @@ class THREESystem extends cxVoidSystem
      */
     update ()
     {
-        if(this.camera){
+        if(this.camera !== null){
             this.renderer.render( this.scene, this.camera );
         }
     }
