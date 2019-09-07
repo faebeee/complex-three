@@ -1,32 +1,32 @@
 {
-  "name": "complex-threejs",
-  "version": "3.0.1",
-  "description": "Threejs implementation for complexjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/complexjs/complex-three.git"
-  },
-  "main" : "Threejs.js",
-  "keywords": [
-    "ThreeJS",
-    "WebGL",
-    "html5",
-    "Canvas",
-    "3d",
-    "Complex",
-    "ComplexJS"
-  ],
-  "dependencies": {
-    "three": "^0.80.1",
-    "complex-engine": "^3.0.0"
-  },
-  "author": "Faebeee",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/complexjs/complex-three/issues"
-  },
-  "homepage": "https://github.com/complexjs/complex-three#readme"
+    "name": "complex-threejs",
+    "version": "4.0.0",
+    "description": "Threejs implementation for complexjs",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/complexjs/complex-three.git"
+    },
+    "main": "index.js",
+    "keywords": [
+        "ThreeJS",
+        "WebGL",
+        "html5",
+        "Canvas",
+        "3d",
+        "Complex",
+        "ComplexJS"
+    ],
+    "dependencies": {
+        "three": "^0.108.0",
+        "complex-engine": "^7.1.8"
+    },
+    "author": "Faebeee",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/complexjs/complex-three/issues"
+    },
+    "homepage": "https://github.com/complexjs/complex-three#readme"
 }
