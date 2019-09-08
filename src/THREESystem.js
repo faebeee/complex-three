@@ -3,17 +3,19 @@ import * as THREE from 'three';
 import THREEComponent from './THREEComponent';
 
 export default class THREESystem extends VoidSystem {
-    constructor(camera, renderer = null, container = document.body) {
+    constructor(camera, scene = null, renderer = null, container = document.body) {
         super();
         this.camera = camera;
-        this.renderer = renderer || new THREE.WebGLRenderer();
         this.container = container;
-        this.scene = new THREE.Scene();
+
+        this.renderer = renderer || new THREE.WebGLRenderer();
+        this.scene = scene || new THREE.Scene();
+
         if (!renderer) {
             this.renderer.setSize(window.innerWidth, window.innerHeight);
         }
-        this.container.appendChild(this.renderer.domElement);
 
+        this.container.appendChild(this.renderer.domElement);
 
         window.addEventListener('resize', (e) => {
             this.onWindowResize(e);
@@ -35,13 +37,17 @@ export default class THREESystem extends VoidSystem {
 
     added(entity) {
         if (entity.hasComponent(THREEComponent)) {
-            this.scene.add(entity.getComponent(THREEComponent).mesh);
+            entity.getComponents(THREEComponent).map((comp) => {
+                this.scene.add(comp.mesh);
+            })
         }
     }
 
     removed(entity) {
         if (entity.hasComponent(THREEComponent)) {
-            this.scene.remove(entity.getComponent(THREEComponent).mesh);
+            entity.getComponents(THREEComponent).map((comp) => {
+                this.scene.remove(comp.mesh);
+            })
         }
     }
 
