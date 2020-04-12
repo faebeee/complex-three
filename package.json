@@ -1,6 +1,6 @@
 {
     "name": "complex-threejs",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "description": "Threejs implementation for complexjs",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,8 +20,10 @@
         "ComplexJS"
     ],
     "dependencies": {
-        "three": "^0.108.0",
-        "complex-engine": "^7.1.8"
+        "three": "^0.108.0"
+    },
+    "peerDependencies": {
+        "complex-engine": "^7.1.9"
     },
     "author": "Faebeee",
     "license": "ISC",
