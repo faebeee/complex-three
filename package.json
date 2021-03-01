@@ -20,7 +20,7 @@
         "ComplexJS"
     ],
     "dependencies": {
-        "three": "^0.108.0"
+        "three": "^0.125.0"
     },
     "peerDependencies": {
         "complex-engine": "^7.1.9"
